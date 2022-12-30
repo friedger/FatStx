@@ -258,7 +258,8 @@ function Home() {
                       year = {year}
                       setYear = {setYear}
                     />
-                  } 
+                  }
+                />
 
                 <Route path="balances"
                   element={
