@@ -1,4 +1,6 @@
 import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
+import { yearEnd } from "../bo/GlobalConst";
+
 // import { callReadOnlyFunction } from '@stacks/transactions';
 // import { StacksMainnet } from '@stacks/network';
 
@@ -168,4 +170,13 @@ function filterDates(json,startDate,endDate) {
         isComplete=false;
     }
     return [isComplete,outputArray];
+}
+
+export async function processBalances(walletId, year) {
+    const untilBlock = year === "All" ? Number.MAX_VALUE : yearEnd[year]?.stxHeight || 0;
+    let baseUrl = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${walletId}/balances?until_block=${untilBlock}&unanchored=false`
+    let url = baseUrl;
+    let ret = await processOneApiPage(url);
+    console.log(ret)
+    return [ret[0] !== 200, ret[1]];
 }

@@ -19,6 +19,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Grid from '@mui/material/Grid';
 
 import TxReport from './TxReport'
+import BalanceReport from './BalanceReport'
 import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
 import Disclaimer from './Disclaimer'
@@ -32,6 +33,7 @@ function Home() {
 
   const [walletId, setWalletId] = useState('');
   const [txnData, setTxnData] = useState([]);
+  const [balanceData, setBalanceData] = useState([]);
   const [stackData, setStackData] = useState([]);
   const [stackDataNew, setStackDataNew] = useState([]);
   const [coin, setCoin] = useState('');
@@ -170,6 +172,16 @@ function Home() {
                       color="inherit"
                       underline="hover"
                       component={RouterLink}
+                      to="/balances"
+                      sx={{ my: 1, mx: 1.5 }}
+                    >
+                      Balances
+                    </Link>
+                    <Link
+                      variant="button"
+                      color="inherit"
+                      underline="hover"
+                      component={RouterLink}
                       to="/stacking"
                       sx={{ my: 1, mx: 1.5 }}
                     >
@@ -247,6 +259,31 @@ function Home() {
                       setYear = {setYear}
                     />
                   } 
+
+                <Route path="balances"
+                  element={
+                    <BalanceReport
+                      walletId = {walletId}
+                      setWalletId = {setWalletId}
+                      balanceData = {balanceData}
+                      setBalanceData = {setBalanceData}
+                      year = {year}
+                      setYear = {setYear}
+                    />
+                  }
+                />
+
+                <Route path="balances/:walletInPath"
+                  element={
+                    <BalanceReport
+                      walletId = {walletId}
+                      setWalletId = {setWalletId}
+                      balanceData = {balanceData}
+                      setBalanceData = {setBalanceData}
+                      year = {year}
+                      setYear = {setYear}
+                    />
+                  }
                 />
                 
                 <Route path="stacking" 
